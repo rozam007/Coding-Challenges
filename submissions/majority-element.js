@@ -3,14 +3,21 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    const mappings = {}
-    for(let num of nums){
-        mappings[num] = (mappings[num] || 0) + 1;
-    }
+    let majority = nums[0];
+    let votes = 1;
 
-    for(let key in mappings){
-        if(mappings[key] > nums.length/2){
-            return Number(key);
+    for(let i=1; i<nums.length; i++){
+        if(votes === 0){
+            majority=nums[i];
+            votes++;
+        }
+        else if (nums[i] === majority){
+            votes++
+        }
+        else{
+            votes--;
         }
     }
+
+    return majority;
 };
